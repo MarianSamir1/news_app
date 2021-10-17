@@ -2,6 +2,8 @@
 
 A new Flutter project.
 
+This is a news app project where you can read about sports, science or business news. Or search for any news you want to read
+
 ## Getting Started
 
 This project is a starting point for a Flutter application.
