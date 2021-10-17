@@ -1,0 +1,47 @@
+import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:news_app/shared/component/components.dart';
+import 'package:news_app/shared/cupit/cubit.dart';
+import 'package:news_app/shared/cupit/states.dart';
+
+// ignore: must_be_immutable
+class SearchScreen extends StatelessWidget {
+  var searchController = TextEditingController();
+
+  @override
+  Widget build(BuildContext context) {
+    return BlocConsumer<AppCubit,AppStates>(
+      listener: (context, state) {},
+      builder: (context, state) {
+        return Scaffold(
+          appBar: AppBar(),
+          body: Padding(
+            padding: const EdgeInsets.all(20.0),
+            child: Column(
+              children: [
+                customTextFormFeild(
+                    controller: searchController,
+                    keyboardType: TextInputType.text,
+                    prefixIcon: Icon(Icons.search, color: Colors.grey,),
+                    label: 'Search',
+                    onChange: (String value) {
+                      print("ttttttttttttttttttttttttttttt");
+                      print('the valueeeeeeee $value');
+                      AppCubit.get(context).getSearchData(value);
+                    }),
+                    state ==  AppLoadingState() ? Expanded(child: Center(child: CircularProgressIndicator()))
+                    :    
+                Expanded(
+                 child: ListView.separated(
+                    itemBuilder:(context , index)=> newsComponent(AppCubit.get(context).search[index], context), 
+                    separatorBuilder: (context , index)=> myDivider(), 
+                    itemCount:  AppCubit.get(context).search.length),
+               )    
+              ],
+            ),
+          ),
+        );
+      },
+    );
+  }
+}
