@@ -1,8 +1,6 @@
 # news_app
 
-A new Flutter project.
-
-This is a news app project where you can read about sports, science or business news. Or search for any news you want to read
+This is a news app project where you can read about sports, science or business news. Or search for any news you want to read and aslo it has the dark mode option. Imade it to learn the all basics of REST APIs by using (Dio packedge) , (shared Preference) and state management (Bloc)
 
 ## Getting Started
 
