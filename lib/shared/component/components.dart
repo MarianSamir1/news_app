@@ -19,7 +19,7 @@ Widget newsComponent(artical , context){
                     borderRadius: BorderRadius.circular(10),
                     image: DecorationImage(
                       fit: BoxFit.cover,
-                      image: artical['urlToImage']!=null? NetworkImage('${artical['urlToImage']}'): NetworkImage("https://cdn.pixabay.com/photo/2015/04/19/08/33/flower-729512_960_720.jpg"),
+                      image: artical['urlToImage']!=null? NetworkImage('${artical['urlToImage']}'): NetworkImage("https://freesvg.org/img/newspapaer.png"),
                   )),
                 ),
                 SizedBox(width: 10,),
