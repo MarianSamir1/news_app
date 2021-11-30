@@ -94,15 +94,18 @@ class AppCubit extends Cubit<AppStates>{
 
   }
 
+  String? searchData ;
+
   List<dynamic> search = [];
 
-  void getSearchData( String query){
-    emit(AppLoadingState());
-
+  void getSearchData(){
+    emit(AppGetSearchLoadingState());
+    search = [];
+    print('query::::::''$searchData');
     DioHelper.getData(
       url: 'v2/everything', 
       query: {
-        'q':'$query',
+        'q':'$searchData',
         'apiKey':'1131f368b3a146618fb8ceda159d09ac'
       }).then((value) {
         search = value.data['articles'];

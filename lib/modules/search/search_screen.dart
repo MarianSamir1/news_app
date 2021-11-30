@@ -10,7 +10,7 @@ class SearchScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BlocConsumer<AppCubit,AppStates>(
+    return BlocConsumer<AppCubit, AppStates>(
       listener: (context, state) {},
       builder: (context, state) {
         return Scaffold(
@@ -19,24 +19,33 @@ class SearchScreen extends StatelessWidget {
             padding: const EdgeInsets.all(20.0),
             child: Column(
               children: [
-                customTextFormFeild(
-                    controller: searchController,
-                    keyboardType: TextInputType.text,
-                    prefixIcon: Icon(Icons.search, color: Colors.grey,),
-                    label: 'Search',
-                    onChange: (String value) {
-                      print("ttttttttttttttttttttttttttttt");
-                      print('the valueeeeeeee $value');
-                      AppCubit.get(context).getSearchData(value);
-                    }),
-                    state ==  AppLoadingState() ? Expanded(child: Center(child: CircularProgressIndicator()))
-                    :    
-                Expanded(
-                 child: ListView.separated(
-                    itemBuilder:(context , index)=> newsComponent(AppCubit.get(context).search[index], context), 
-                    separatorBuilder: (context , index)=> myDivider(), 
-                    itemCount:  AppCubit.get(context).search.length),
-               )    
+                TextFormField(
+                  controller: searchController,
+                  keyboardType: TextInputType.text,
+                  onFieldSubmitted: (value){
+                    AppCubit.get(context).searchData =  value;
+                    AppCubit.get(context).getSearchData();
+                  },
+                  decoration: InputDecoration(
+                      labelStyle: TextStyle(color: Colors.grey),
+                      prefixIcon: Icon(
+                        Icons.search,
+                        color: Colors.grey,
+                      ),
+                      border: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(5)),
+                      labelText: 'Search'),
+                ),
+                state == AppGetSearchLoadingState()
+                    ? Expanded(
+                        child: Center(child: CircularProgressIndicator()))
+                    : Expanded(
+                        child: ListView.separated(
+                            itemBuilder: (context, index) => newsComponent(
+                                AppCubit.get(context).search[index], context),
+                            separatorBuilder: (context, index) => myDivider(),
+                            itemCount: AppCubit.get(context).search.length),
+                      )
               ],
             ),
           ),
